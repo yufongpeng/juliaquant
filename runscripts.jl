@@ -1,0 +1,7 @@
+run(`julia --project batch.jl -d "\t" --col "Data File" --id "Cal2_(\d)_(\d*-*\d*)" --f2c 0.1 1 10 -- data/sample.txt`)
+run(`julia --project recovery.jl -o result/recovery --colanalyte Drug data/D1.csv`)
+run(`julia --project matrix-effect.jl -o result/me --matrix "Pre.*_(.*)_.*" --stds "Post.*_(.*)_.*" --colanalyte Drug data/D1.csv`)
+run(`julia --project accuracy-precision.jl --cols A --rows L D -o result/ap --colanalyte Drug data/D1.csv data/D2S0S7.csv data/D3.csv`)
+run(`julia --project stability.jl -o result/st --day0 "Pre.*_(.*)_.*" --stored "S.*_(.*)_D(.*)_(.*)_.*" --colanalyte Drug --colcondition Temperature data/D2S0S7.csv`)
+run(`julia --project quality-control.jl -o result/qc.csv --colanalyte Drug data/D1.csv`)
+run(`julia --project sample.jl -o result/sample --colanalyte Drug --lod 1 --lloq 3 --uloq 100 200 100 --lodsub missing -- data/sample.csv`)

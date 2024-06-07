@@ -1,0 +1,16 @@
+[delim]
+\t
+
+[Analyte]
+Analyte
+
+[Sample]
+Cal2_1_0-1.d
+Cal2_2_0-2.d
+Cal2_3_0-5.d
+Cal2_4_01.d
+Cal2_5_02.d
+Cal2_6_05.d
+Cal2_7_10.d
+Cal2_8_15.d
+Cal2_9_20.d
