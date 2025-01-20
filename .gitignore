@@ -1,3 +1,13 @@
-precompile-so/*
+precompile-so/accuracy-precision/*
+precompile-so/batch/*
+precompile-so/calibrate/*
+precompile-so/matrix-effect/*
+precompile-so/quality-control/*
+precompile-so/recovery/*
+precompile-so/sample/*
+precompile-so/stability/*
+precompile-so/*.so
+precompile-functions/precompile-functions*
 result/*
 ui/*
+data/*-test*

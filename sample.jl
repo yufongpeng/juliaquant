@@ -8,10 +8,10 @@ global drop = String[]
 global notsort = ["F"]
 global source = :mh
 global colanalyte = "Analyte"
-global lod = nothing
-global loq = nothing
-global lloq = NaN
-global uloq = NaN
+global lodval = nothing
+global loqval = nothing
+global lloqval = NaN
+global uloqval = NaN
 global lodsub = "<LOD"
 global loqsub = "<LOQ"
 global lloqsub = "<LLOQ"
@@ -72,49 +72,49 @@ let i = 0
             end
         elseif ARGS[i] == "--lod"
             i += 1
-            global lod = [ARGS[i]]
+            global lodval = [ARGS[i]]
             while i < length(ARGS) && !startswith(ARGS[i + 1], "-")
                 i += 1
-                push!(lod, ARGS[i])
+                push!(lodval, ARGS[i])
             end
-            lod = try 
-                parse.(Float64, lod)
+            global lodval = try 
+                parse.(Float64, lodval)
             catch e
                 nothing
             end
         elseif ARGS[i] == "--loq"
             i += 1
-            global loq = [ARGS[i]]
+            global loqval = [ARGS[i]]
             while i < length(ARGS) && !startswith(ARGS[i + 1], "-")
                 i += 1
-                push!(loq, ARGS[i])
+                push!(loqval, ARGS[i])
             end
-            loq = try 
-                parse.(Float64, loq)
+            global loqval = try 
+                parse.(Float64, loqval)
             catch e
                 nothing
             end
         elseif ARGS[i] == "--lloq"
             i += 1
-            global lloq = [ARGS[i]]
+            global lloqval = [ARGS[i]]
             while i < length(ARGS) && !startswith(ARGS[i + 1], "-")
                 i += 1
-                push!(lloq, ARGS[i])
+                push!(lloqval, ARGS[i])
             end
-            lloq = try 
-                parse.(Float64, lloq)
+            global lloqval = try 
+                parse.(Float64, lloqval)
             catch e
                 nothing
             end
         elseif ARGS[i] == "--uloq"
             i += 1
-            global uloq = [ARGS[i]]
+            global uloqval = [ARGS[i]]
             while i < length(ARGS) && !startswith(ARGS[i + 1], "-")
                 i += 1
-                push!(uloq, ARGS[i])
+                push!(uloqval, ARGS[i])
             end
-            uloq = try 
-                parse.(Float64, uloq)
+            global uloqval = try 
+                parse.(Float64, uloqval)
             catch e
                 nothing
             end
@@ -207,15 +207,15 @@ function main()
     replace!(notsort, "A" => colanalyte, "F" => "File")
     replace!(drop, "A" => colanalyte, "F" => "File")
     data = all(endswith.(input, ".csv")) ? AMV.read(input) : CQA.read(first(input), DataFrame)
-    if isnan(lloq)
-        lloq = data isa Batch ? map(a -> CQA.lloq(data.calibration[a]), eachanalyte(getproperty(data.data, type))) : nothing
+    if isnan(lloqval)
+        global lloqval = data isa Batch ? map(a -> CQA.lloq(data.calibration[a]), eachanalyte(getproperty(data.data, type))) : nothing
     end
-    if isnan(uloq)
-        uloq = data isa Batch ? map(a -> CQA.uloq(data.calibration[a]), eachanalyte(getproperty(data.data, type))) : nothing
+    if isnan(uloqval)
+        global uloqval = data isa Batch ? map(a -> CQA.uloq(data.calibration[a]), eachanalyte(getproperty(data.data, type))) : nothing
     end
     data = data isa Batch ? data.data : data
     sample = sample_report(data; id, type, colanalyte)
-    td = qualify!(pivot(sample, cols; rows, notsort, drop, prefix); lod, loq, lloq, uloq, lodsub, loqsub, lloqsub, uloqsub)
+    td = qualify!(pivot(sample, cols; rows, notsort, drop, prefix); lod = lodval, loq = loqval, lloq = lloqval, uloq = uloqval, lodsub, loqsub, lloqsub, uloqsub)
     println(stdout)
     display(td)    
     println(stdout)

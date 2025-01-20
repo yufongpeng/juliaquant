@@ -1,7 +1,7 @@
 import Base: show
-struct Item
+struct Item{T}
     name::Vector{String}
-    value::Vector{String}
+    value::T
 end
 
 struct Option
@@ -20,10 +20,17 @@ struct HelpMessage
     block::Vector{Block}
 end
 
-function Base.show(io::IO, item::Item)
+function Base.show(io::IO, item::Item{T}) where {T <: Vector{String}}
     print(io, join(item.name, ", "), " ")
     isempty(item.value) || print(io, "{", join(item.value, "|"), "}")
 end
+
+function Base.show(io::IO, item::Item{T}) where {T <: String}
+    print(io, join(item.name, ", "), " ")
+    isempty(item.value) || print(io, "<", item.value, ">")
+end
+
+Item(name::Vector{String}) = Item(name, "")
 
 function Base.show(io::IO, option::Option)
     print(io, option.item)
@@ -33,6 +40,7 @@ end
 
 function Base.show(io::IO, block::Block)
     print(io, block.title, "\n\n")
+    isempty(block.option) && return
     items = map(x -> repr(x.item), block.option)
     des = map(x -> x.description, block.option)
     li = maximum(length, items)
@@ -51,14 +59,17 @@ function Base.show(io::IO, hm::HelpMessage)
 end
 
 const str_julia = "julia [julia switches] --"
-const str_juliaquant = "juliaquant.jl [juliaquant switches] -- [command]"
+const str_juliaquant_jl = "juliaquant.jl [juliaquant.jl switches] -- [command]"
+const str_juliaquant = "[switches] [command]"
 const str_sis = "[switches] -- [input files]"
 const str_si = "[switches] -- [input file]"
 const str_ijq = "[command] [switches] -- [input]"
 const str_description = Dict{String, String}(
-    "juliaquant"            => "Quantitative analysis with julia.",
+    "juliaquant.jl"         => "Quantitative analysis with julia.",
+    "juliaquant"            => "Set switches and run the following command.",
     "julia"                 => "Run julia codes or enter julia REPL. The switch '--project' is set; for other switches, see julia manual.",
-    "build"                 => "Build juliaquant.",
+    "instantiate"           => "Instantiate juliaquant.",
+    "update"                => "Update packages of juliaquant.",
     "precompile"            => "Precompile juliaquant. The input file is an optional julia script file.",
     "batch"                 => "Create a new batch. The input files can be multiple text files.",
     "calibrate"             => "Calibrate the input batch with a GUI.",
@@ -75,78 +86,92 @@ const printhelp = "Print this message"
 const str_command = [
     Option(
         Item(
-            ["jl", "julia", "juliaquant"],
-            String[]
+            ["jq", "juliaquant"],
+            "[switches] [command] [args]"
+        ),
+        "Quantitative analysis with user-defined julia switches."
+    ),
+    Option(
+        Item(
+            ["jl", "julia"],
+            "args"
         ),
         "Run julia codes or enter julia REPL."
     ),
     Option(
         Item(
-            ["bd", "build"],
-            String[]
+            ["it", "instantiate"],
+            ""
         ),
-        "Build juliaquant."
+        "Instantiate juliaquant."
+    ),
+    Option(
+        Item(
+            ["up", "update"],
+            ""
+        ),
+        "Update packages of juliaquant."
     ),
     Option(
         Item(
             ["pc", "precompile"],
-            String[]
+            ""
         ),
         "Precompile juliaquant."
     ),
     Option(
         Item(
             ["bt", "batch"],
-            String[]
+            "args"
         ),
         "Create a new batch."
     ),
     Option(
         Item(
             ["cl", "cal", "calibrate"],
-            String[]
+            "args"
         ),
         "Calibrate the input batch with a GUI."
     ),
     Option(
         Item(
             ["ap", "accuracy-precision"],
-            String[]
+            "args"
         ),
         "Compute accuracy and precision."
     ),
     Option(
         Item(
             ["st", "stability"],
-            String[]
+            "args"
         ),
         "Compute stability."
     ),
     Option(
         Item(
             ["me", "matrix-effect"],
-            String[]
+            "args"
         ),
         "Compute matrix effect."
     ),
     Option(
         Item(
             ["rc", "recovery"],
-            String[]
+            "args"
         ),
         "Compute recovery."
     ),
     Option(
         Item(
             ["qc", "quality-control"],
-            String[]
+            "args"
         ),
         "QC analysis."
     ),
     Option(
         Item(
             ["sp", "sample"],
-            String[]
+            "args"
         ),
         "Sample analysis."
     )
@@ -155,15 +180,27 @@ const str_switch = Dict{String, Vector{Option}}(
     "juliaquant" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
         Option(
             Item(
-                ["-i", "--interactive"],
-                String[]
+                ["-NJ", "--no-sysimage"]
+            ),
+            "Do not use default sysimage."
+        )
+    ],
+    "juliaquant.jl" => [
+        Option(
+            Item(
+                ["-h", "--help"]
+            ),
+            printhelp
+        ),
+        Option(
+            Item(
+                ["-i", "--interactive"]
             ),
             "Enter interactive mode"
         ),
@@ -171,15 +208,27 @@ const str_switch = Dict{String, Vector{Option}}(
     "precompile" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
         Option(
             Item(
-                ["-p", "--package <packages>"],
-                String[]
+                ["-a", "--all"]
+            ),
+            "Precompile all commands."
+        ),
+        Option(
+            Item(
+                ["-c", "--command"],
+                "command"
+            ),
+            "Command to be precompiled."
+        ),
+        Option(
+            Item(
+                ["-p", "--package"],
+                "packages"
             ),
             "Packages to be compiled. The default is all packages in project except 'PackageCompiler'."  
         ),
@@ -201,8 +250,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "batch" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -229,15 +277,13 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-sdt"],
-                String[]
+                ["-sdt"]
             ),
             "Set `datatable` to be `SampleDataTable` (default)"
         ),
         Option(
             Item(
-                ["-adt"],
-                String[]
+                ["-adt"]
             ),
             "Set `datatable` to be `AnalyteDataTable`"
         ),
@@ -272,7 +318,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files"
         ),
@@ -287,8 +333,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "calibrate" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -337,14 +382,14 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.batch')"
         ),
         Option(
             Item(
-                ["-o", "--output <input files>"],
-                String[]
+                ["-o", "--output"],
+                "dir"
             ),
             "Set the output directory"
         )
@@ -352,8 +397,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "accuracy-precision" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -387,22 +431,19 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-p", "--prefix"],
-                String[]
+                ["-p", "--prefix"]
             ),
             "Preserve original column names in new column names in wide format"
         ),
         Option(
             Item(
-                ["--not-pct"],
-                String[]
+                ["--not-pct"]
             ),
             "Do not convert ratio data into percentage (*100)"
         ),
         Option(
             Item(
-                ["--not-merge"],
-                String[]
+                ["--not-merge"]
             ),
             "Do not merge mean and std with ±"
         ),
@@ -465,7 +506,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.csv', '.at', '.batch')"
         ),
@@ -480,8 +521,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "stability" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -522,29 +562,25 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-p", "--prefix"],
-                String[]
+                ["-p", "--prefix"]
             ),
             "Preserve original column names in new column names in wide format"
         ),
         Option(
             Item(
-                ["--not-accuracy"],
-                String[]
+                ["--not-accuracy"]
             ),
             "Indicate the input data type is not accuracy, and thus it will not be transformed into percentage \ni\teven if '--not-pct' is not set."
         ),
         Option(
             Item(
-                ["--not-pct"],
-                String[]
+                ["--not-pct"]
             ),
             "Do not convert ratio data into percentage (*100)"
         ),
         Option(
             Item(
-                ["--not-merge"],
-                String[]
+                ["--not-merge"]
             ),
             "Do not merge mean and std with ±"
         ),
@@ -614,7 +650,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.csv', '.at', '.batch')"
         ),
@@ -629,8 +665,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "matrix-effect" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -664,22 +699,19 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-p", "--prefix"],
-                String[]
+                ["-p", "--prefix"]
             ),
             "Preserve original column names in new column names in wide format"
         ),
         Option(
             Item(
-                ["--not-pct"],
-                String[]
+                ["--not-pct"]
             ),
             "Do not convert ratio data into percentage (*100)"
         ),
         Option(
             Item(
-                ["--not-merge"],
-                String[]
+                ["--not-merge"]
             ),
             "Do not merge mean and std with ±"
         ),
@@ -735,7 +767,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.csv', '.at', '.batch')"
         ),
@@ -750,8 +782,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "recovery" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -785,22 +816,19 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-p", "--prefix"],
-                String[]
+                ["-p", "--prefix"]
             ),
             "Preserve original column names in new column names in wide format"
         ),
         Option(
             Item(
-                ["--not-pct"],
-                String[]
+                ["--not-pct"]
             ),
             "Do not convert ratio data into percentage (*100)"
         ),
         Option(
             Item(
-                ["--not-merge"],
-                String[]
+                ["--not-merge"]
             ),
             "Do not merge mean and std with ±"
         ),
@@ -856,7 +884,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.csv', '.at', '.batch')"
         ),
@@ -871,8 +899,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "quality-control" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -899,22 +926,19 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-p", "--prefix"],
-                String[]
+                ["-p", "--prefix"]
             ),
             "Preserve original column names in new column names in wide format"
         ),
         Option(
             Item(
-                ["--not-pct"],
-                String[]
+                ["--not-pct"]
             ),
             "Do not convert ratio data into percentage (*100)"
         ),
         Option(
             Item(
-                ["--not-merge"],
-                String[]
+                ["--not-merge"]
             ),
             "Do not merge mean and std with ±"
         ),
@@ -963,7 +987,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.csv', '.at', '.batch')"
         ),
@@ -978,8 +1002,7 @@ const str_switch = Dict{String, Vector{Option}}(
     "sample" => [
         Option(
             Item(
-                ["-h", "--help"],
-                String[]
+                ["-h", "--help"]
             ),
             printhelp
         ),
@@ -1006,22 +1029,19 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["-p", "--prefix"],
-                String[]
+                ["-p", "--prefix"]
             ),
             "Preserve original column names in new column names in wide format"
         ),
         Option(
             Item(
-                ["--not-pct"],
-                String[]
+                ["--not-pct"]
             ),
             "Do not convert ratio data into percentage (*100)"
         ),
         Option(
             Item(
-                ["--not-merge"],
-                String[]
+                ["--not-merge"]
             ),
             "Do not merge mean and std with ±"
         ),
@@ -1119,7 +1139,7 @@ const str_switch = Dict{String, Vector{Option}}(
         Option(
             Item(
                 ["-i", "--input"],
-                String[]
+                "files…"
             ),
             "Set the input files ('.csv', '.at', '.batch')"
         ),

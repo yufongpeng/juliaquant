@@ -16,9 +16,10 @@ function main()
     open(joinpath(cdt, "Project.toml"), "w") do io
         TOML.print(io, tomljq)
     end
-    Pkg.update()
-    Pkg.resolve()
-    mkpath(joinpath(cdt, "precompile-so"))
+    Pkg.instantiate()
+    # Pkg.update()
+    # Pkg.resolve()
+    # mkpath(joinpath(cdt, "precompile-so"))
     @info "juliaquant build successfully."
     println(stdout)
 end
