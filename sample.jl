@@ -8,6 +8,7 @@ global drop = String[]
 global notsort = ["F"]
 global source = :mh
 global colanalyte = "Analyte"
+global coldatafile = "File"
 global lodval = nothing
 global loqval = nothing
 global lloqval = NaN
@@ -42,6 +43,9 @@ let i = 0
         elseif ARGS[i] == "--colanalyte"
             i += 1
             global colanalyte = ARGS[i]
+        elseif ARGS[i] == "--coldatafile"
+            i += 1
+            global coldatafile = ARGS[i]
         elseif ARGS[i] == "--rows"
             i += 1
             global rows = [ARGS[i]]
@@ -202,16 +206,16 @@ function main()
         println(stdout)
         return
     end
-    replace!(rows, "A" => colanalyte, "F" => "File")
-    replace!(cols, "A" => colanalyte, "F" => "File")
-    replace!(notsort, "A" => colanalyte, "F" => "File")
-    replace!(drop, "A" => colanalyte, "F" => "File")
+    replace!(rows, "A" => colanalyte, "F" => coldatafile)
+    replace!(cols, "A" => colanalyte, "F" => coldatafile)
+    replace!(notsort, "A" => colanalyte, "F" => coldatafile)
+    replace!(drop, "A" => colanalyte, "F" => coldatafile)
     data = all(endswith.(input, ".csv")) ? AMV.read(input) : CQA.read(first(input), DataFrame)
-    if isnan(lloqval)
-        global lloqval = data isa Batch ? map(a -> CQA.lloq(data.calibration[a]), eachanalyte(getproperty(data.data, type))) : nothing
+    if lloqval isa Number && isnan(lloqval)
+        global lloqval = data isa Batch ? map(a -> CQA.lloq(data.calibration[a]), analyteobj(getproperty(data.data, type))) : nothing
     end
-    if isnan(uloqval)
-        global uloqval = data isa Batch ? map(a -> CQA.uloq(data.calibration[a]), eachanalyte(getproperty(data.data, type))) : nothing
+    if uloqval isa Number && isnan(uloqval)
+        global uloqval = data isa Batch ? map(a -> CQA.uloq(data.calibration[a]), analyteobj(getproperty(data.data, type))) : nothing
     end
     data = data isa Batch ? data.data : data
     sample = sample_report(data; id, type, colanalyte)

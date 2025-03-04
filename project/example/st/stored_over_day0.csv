@@ -1,0 +1,37 @@
+Drug,Temperature,Day,Level,Stats,Data
+A,4C,7,0-2,Stability(%),95.27894268649129
+A,4C,7,0-2,Standard Deviation(%),4.694027071651808
+A,4C,7,15,Stability(%),105.84875935407642
+A,4C,7,15,Standard Deviation(%),11.325069124763154
+A,N20C,7,0-2,Stability(%),104.07929851315288
+A,N20C,7,0-2,Standard Deviation(%),7.340206440222328
+A,N20C,7,15,Stability(%),97.77471445450966
+A,N20C,7,15,Standard Deviation(%),10.428840490128403
+A,RT,7,0-2,Stability(%),93.40449866565001
+A,RT,7,0-2,Standard Deviation(%),6.34414394704846
+A,RT,7,15,Stability(%),91.21045030852042
+A,RT,7,15,Standard Deviation(%),8.891126760553878
+B,4C,7,0-2,Stability(%),108.97566959721938
+B,4C,7,0-2,Standard Deviation(%),5.828788106645691
+B,4C,7,15,Stability(%),101.95035460992905
+B,4C,7,15,Standard Deviation(%),8.698094182562237
+B,N20C,7,0-2,Stability(%),111.97437470183331
+B,N20C,7,0-2,Standard Deviation(%),8.811471372746228
+B,N20C,7,15,Stability(%),99.95567375886523
+B,N20C,7,15,Standard Deviation(%),5.652057853431159
+B,RT,7,0-2,Stability(%),94.7999727390445
+B,RT,7,0-2,Standard Deviation(%),9.737687267329232
+B,RT,7,15,Stability(%),96.21960486322186
+B,RT,7,15,Standard Deviation(%),12.602541833940231
+C,4C,7,0-2,Stability(%),97.30140630938806
+C,4C,7,0-2,Standard Deviation(%),7.239539596327392
+C,4C,7,15,Stability(%),97.42973266929988
+C,4C,7,15,Standard Deviation(%),8.444397639616868
+C,N20C,7,0-2,Stability(%),101.35563157227922
+C,N20C,7,0-2,Standard Deviation(%),8.754987266384031
+C,N20C,7,15,Stability(%),95.82689335394127
+C,N20C,7,15,Standard Deviation(%),11.565317371405822
+C,RT,7,0-2,Stability(%),100.69048524008618
+C,RT,7,0-2,Standard Deviation(%),8.962932976044492
+C,RT,7,15,Stability(%),98.8608392008701
+C,RT,7,15,Standard Deviation(%),8.672362791992343

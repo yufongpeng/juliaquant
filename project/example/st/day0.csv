@@ -1,0 +1,13 @@
+Drug,Temperature,Day,Level,Stats,Data
+A,,0,0-2,Accuracy(%),104.92
+A,,0,0-2,Standard Deviation(%),4.7441542976593825
+A,,0,15,Accuracy(%),101.55999999999999
+A,,0,15,Standard Deviation(%),9.410526021429405
+B,,0,0-2,Accuracy(%),97.82000000000001
+B,,0,0-2,Standard Deviation(%),4.327470392735231
+B,,0,15,Accuracy(%),105.28000000000002
+B,,0,15,Standard Deviation(%),5.5237668307052985
+C,,0,0-2,Accuracy(%),105.24000000000001
+C,,0,0-2,Standard Deviation(%),6.5660490403285845
+C,,0,15,Accuracy(%),116.46000000000001
+C,,0,15,Standard Deviation(%),8.442629922008889

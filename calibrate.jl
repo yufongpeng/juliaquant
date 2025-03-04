@@ -36,9 +36,6 @@ let i = 0
         elseif ARGS[i] == "-i" || ARGS[i] == "--input"
             i += 1
             global input = ARGS[i]
-            if isnothing(output)
-                global output = ARGS[i]
-            end
         elseif ARGS[i] == "-o" || ARGS[i] == "--output"
             i += 1
             global output = ARGS[i]
@@ -76,8 +73,12 @@ function main()
         println(stdout)
         return
     end
+    if isnothing(output)
+        global output = input
+    end
     batch = CQA.read(input, DataFrame; delim)
     interactive_calibrate!(batch; root = output, signal = isnothing(signal) ? batch.method.signal : signal, rel_sig, est_conc, dev_acc, lloq_multiplier)
+    println(stdout)
 end
 
 (@__MODULE__() == Main) && main()

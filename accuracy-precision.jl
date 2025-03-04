@@ -130,7 +130,7 @@ function main()
     println(stdout)
     printstyled("Daily: ", color = :blue)
     println(stdout)
-    td1 = merge ? pivot(selecby(ap.daily, colstats, pct ? ["Accuracy(%)", "Standard Deviation(%)"] => mean_plus_minus_std => "Accuracy(%)" : 
+    td1 = merge ? pivot(selectby(ap.daily, colstats, pct ? ["Accuracy(%)", "Standard Deviation(%)"] => mean_plus_minus_std => "Accuracy(%)" : 
                                                     ["Accuracy", "Standard Deviation"] => mean_plus_minus_std => "Accuracy"), 
                         cols; rows, notsort, drop, prefix) : pivot(ap.daily, cols; rows, notsort, drop, prefix)
     display(td1)

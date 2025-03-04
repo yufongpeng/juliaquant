@@ -1,0 +1,73 @@
+Drug,Level,Day,Stats,Data
+A,0-1,1,Accuracy(%),86.5326
+A,0-1,1,Standard Deviation(%),6.106687424455254
+A,0-1,2,Accuracy(%),123.5
+A,0-1,2,Standard Deviation(%),1.189537725337024
+A,0-1,3,Accuracy(%),111.34
+A,0-1,3,Standard Deviation(%),8.505762752393228
+A,0-2,1,Accuracy(%),81.6354
+A,0-2,1,Standard Deviation(%),5.8746004374765795
+A,0-2,2,Accuracy(%),104.92
+A,0-2,2,Standard Deviation(%),4.7441542976593825
+A,0-2,3,Accuracy(%),117.7
+A,0-2,3,Standard Deviation(%),12.137545056559008
+A,02,1,Accuracy(%),116.47999999999999
+A,02,1,Standard Deviation(%),12.728589866909845
+A,02,2,Accuracy(%),121.14000000000001
+A,02,2,Standard Deviation(%),8.579801862514078
+A,02,3,Accuracy(%),121.08
+A,02,3,Standard Deviation(%),6.003082541494837
+A,15,1,Accuracy(%),106.52000000000001
+A,15,1,Standard Deviation(%),13.907623808544722
+A,15,2,Accuracy(%),101.55999999999999
+A,15,2,Standard Deviation(%),9.410526021429405
+A,15,3,Accuracy(%),101.94000000000001
+A,15,3,Standard Deviation(%),3.7246476343407307
+B,0-1,1,Accuracy(%),114.72
+B,0-1,1,Standard Deviation(%),4.232847741178503
+B,0-1,2,Accuracy(%),116.58
+B,0-1,2,Standard Deviation(%),10.417629288854533
+B,0-1,3,Accuracy(%),127.91999999999999
+B,0-1,3,Standard Deviation(%),11.537634072893805
+B,0-2,1,Accuracy(%),107.76000000000002
+B,0-2,1,Standard Deviation(%),4.368981574692215
+B,0-2,2,Accuracy(%),97.82000000000001
+B,0-2,2,Standard Deviation(%),4.327470392735231
+B,0-2,3,Accuracy(%),118.6
+B,0-2,3,Standard Deviation(%),13.870291994042514
+B,02,1,Accuracy(%),122.47999999999999
+B,02,1,Standard Deviation(%),12.988148443869887
+B,02,2,Accuracy(%),120.1
+B,02,2,Standard Deviation(%),6.67345487734801
+B,02,3,Accuracy(%),125.01999999999998
+B,02,3,Standard Deviation(%),8.755112791963331
+B,15,1,Accuracy(%),101.08
+B,15,1,Standard Deviation(%),10.584753185596721
+B,15,2,Accuracy(%),105.28000000000002
+B,15,2,Standard Deviation(%),5.5237668307052985
+B,15,3,Accuracy(%),103.33999999999999
+B,15,3,Standard Deviation(%),4.378127453603882
+C,0-1,1,Accuracy(%),118.78
+C,0-1,1,Standard Deviation(%),6.476650368824918
+C,0-1,2,Accuracy(%),123.8
+C,0-1,2,Standard Deviation(%),3.662649314362491
+C,0-1,3,Accuracy(%),122.5
+C,0-1,3,Standard Deviation(%),5.16817182376903
+C,0-2,1,Accuracy(%),111.23999999999998
+C,0-2,1,Standard Deviation(%),4.293366977093852
+C,0-2,2,Accuracy(%),105.24000000000001
+C,0-2,2,Standard Deviation(%),6.5660490403285845
+C,0-2,3,Accuracy(%),119.1
+C,0-2,3,Standard Deviation(%),13.159217301952273
+C,02,1,Accuracy(%),108.04
+C,02,1,Standard Deviation(%),10.344708792421368
+C,02,2,Accuracy(%),111.85999999999999
+C,02,2,Standard Deviation(%),3.0761989532538387
+C,02,3,Accuracy(%),118.97999999999999
+C,02,3,Standard Deviation(%),6.100573743509713
+C,15,1,Accuracy(%),115.5
+C,15,1,Standard Deviation(%),3.337663853655722
+C,15,2,Accuracy(%),116.46000000000001
+C,15,2,Standard Deviation(%),8.442629922008889
+C,15,3,Accuracy(%),112.26000000000002
+C,15,3,Standard Deviation(%),8.513107540728006

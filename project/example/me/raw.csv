@@ -1,0 +1,25 @@
+Drug,Level,Stats,Data
+A,0-1,Matrix Effect(%),120.92383331350858
+A,0-1,Standard Deviation(%),8.883023093879753
+A,0-2,Matrix Effect(%),111.3677420540481
+A,0-2,Standard Deviation(%),15.351924605604871
+A,02,Matrix Effect(%),127.93471943358344
+A,02,Standard Deviation(%),9.521440420964979
+A,15,Matrix Effect(%),112.69611048629406
+A,15,Standard Deviation(%),6.281874400287136
+B,0-1,Matrix Effect(%),107.09006044838931
+B,0-1,Standard Deviation(%),14.600964163270636
+B,0-2,Matrix Effect(%),106.89773703809797
+B,0-2,Standard Deviation(%),7.017611906763894
+B,02,Matrix Effect(%),117.92008317776886
+B,02,Standard Deviation(%),11.225287897609014
+B,15,Matrix Effect(%),106.29554959814797
+B,15,Standard Deviation(%),12.911873394724225
+C,0-1,Matrix Effect(%),117.49129265861707
+C,0-1,Standard Deviation(%),16.214473133379204
+C,0-2,Matrix Effect(%),111.74045995274957
+C,0-2,Standard Deviation(%),13.85137418345668
+C,02,Matrix Effect(%),118.11876615178507
+C,02,Standard Deviation(%),8.558266738540686
+C,15,Matrix Effect(%),107.43819380448821
+C,15,Standard Deviation(%),6.7476941775620185

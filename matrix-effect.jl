@@ -123,7 +123,7 @@ function main()
     data = all(endswith.(input, ".csv")) ? AMV.read(input) : CQA.read(first(input), DataFrame)
     data = data isa Batch ? data.data : data
     me = me_report(data; matrix, stds, type, pct, colanalyte, colstats, collevel)
-    td = merge ? pivot(selecby(me, colstats, pct ? ["Matrix Effect(%)", "Standard Deviation(%)"] => mean_plus_minus_std => "Matrix Effect(%)" : 
+    td = merge ? pivot(selectby(me, colstats, pct ? ["Matrix Effect(%)", "Standard Deviation(%)"] => mean_plus_minus_std => "Matrix Effect(%)" : 
                                                 ["Matrix Effect", "Standard Deviation"] => mean_plus_minus_std => "Matrix Effect"),
                         cols; rows, notsort, drop, prefix) : pivot(me, cols; rows, notsort, drop, prefix)
     println(stdout)

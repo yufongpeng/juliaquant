@@ -279,13 +279,13 @@ const str_switch = Dict{String, Vector{Option}}(
             Item(
                 ["-sdt"]
             ),
-            "Set `datatable` to be `SampleDataTable` (default)"
+            "Set `datatable` to be `SampleDataTable` (default, each row represents a sample)"
         ),
         Option(
             Item(
                 ["-adt"]
             ),
-            "Set `datatable` to be `AnalyteDataTable`"
+            "Set `datatable` to be `AnalyteDataTable` (default, each column represents a sample)"
         ),
         Option(
             Item(
@@ -299,14 +299,14 @@ const str_switch = Dict{String, Vector{Option}}(
                 ["--col"],
                 ["Sample*", "…"]
             ),
-            "Set column name of row keys"
+            "Set column name of row keys which are samples for `SampleDataTable`, and analytes for `AnalyteDataTable`"
         ),
         Option(
             Item(
                 ["--dot"],
                 ["-*", "…"]
             ),
-            """Set replacement of "." in sample names"""
+            """Set replacement of "." in sample names (calbration concentration)"""
         ),
         Option(
             Item(
@@ -1079,6 +1079,13 @@ const str_switch = Dict{String, Vector{Option}}(
                 ["Analyte*", "…"]
             ),
             "Set column name of analytes"
+        ),
+        Option(
+            Item(
+                ["--coldatafile"],
+                ["File*", "…"]
+            ),
+            "Set column name of data files"
         ),
         Option(
             Item(

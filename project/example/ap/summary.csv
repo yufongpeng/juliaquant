@@ -1,0 +1,73 @@
+Drug,Level,Stats,Data
+A,0-1,Intraday Standard Deviation(%),6.084259234560385
+A,0-1,Accuracy(%),107.12420000000002
+A,0-1,Betweenday Standard Deviation(%),18.84083047320367
+A,0-1,Interday Standard Deviation(%),18.643316519153274
+A,0-1,Repeatability(%),5.679630965328454
+A,0-1,Reproducibility(%),18.306791160376363
+A,0-2,Intraday Standard Deviation(%),8.253038436438628
+A,0-2,Accuracy(%),101.41846666666667
+A,0-2,Betweenday Standard Deviation(%),18.28549685005396
+A,0-2,Interday Standard Deviation(%),17.909128018043386
+A,0-2,Repeatability(%),8.13760916299789
+A,0-2,Reproducibility(%),19.443468358740148
+A,02,Intraday Standard Deviation(%),9.516074120490378
+A,02,Accuracy(%),119.56666666666666
+A,02,Betweenday Standard Deviation(%),2.673300082918748
+A,02,Interday Standard Deviation(%),0.0
+A,02,Repeatability(%),7.958801884993346
+A,02,Reproducibility(%),7.958801884993346
+A,15,Intraday Standard Deviation(%),9.930642812359462
+A,15,Accuracy(%),103.33999999999999
+A,15,Betweenday Standard Deviation(%),2.760507199773266
+A,15,Interday Standard Deviation(%),0.0
+A,15,Repeatability(%),9.609679516508093
+A,15,Reproducibility(%),9.609679516508093
+B,0-1,Intraday Standard Deviation(%),9.301630681409216
+B,0-1,Accuracy(%),119.74000000000001
+B,0-1,Betweenday Standard Deviation(%),7.144872287172102
+B,0-1,Interday Standard Deviation(%),5.80905614823383
+B,0-1,Repeatability(%),7.768189979463183
+B,0-1,Reproducibility(%),9.158644810717346
+B,0-2,Intraday Standard Deviation(%),8.759756465412341
+B,0-2,Accuracy(%),108.06000000000002
+B,0-2,Betweenday Standard Deviation(%),10.393247808072308
+B,0-2,Interday Standard Deviation(%),9.626678208672667
+B,0-2,Repeatability(%),8.106382070527799
+B,0-2,Reproducibility(%),12.044804980105182
+B,02,Intraday Standard Deviation(%),9.829869446403306
+B,02,Accuracy(%),122.53333333333332
+B,02,Betweenday Standard Deviation(%),2.460433566128804
+B,02,Interday Standard Deviation(%),0.0
+B,02,Repeatability(%),8.022200309904767
+B,02,Reproducibility(%),8.022200309904767
+B,15,Intraday Standard Deviation(%),7.342047852381968
+B,15,Accuracy(%),103.23333333333333
+B,15,Betweenday Standard Deviation(%),2.102030764126293
+B,15,Interday Standard Deviation(%),0.0
+B,15,Repeatability(%),7.112090267079724
+B,15,Reproducibility(%),7.112090267079724
+C,0-1,Intraday Standard Deviation(%),5.230423819666372
+C,0-1,Accuracy(%),121.69333333333333
+C,0-1,Betweenday Standard Deviation(%),2.6054046390787984
+C,0-1,Interday Standard Deviation(%),1.147460965203894
+C,0-1,Repeatability(%),4.298036446532024
+C,0-1,Reproducibility(%),4.400250017282515
+C,0-2,Intraday Standard Deviation(%),8.845168172510911
+C,0-2,Accuracy(%),111.86
+C,0-2,Betweenday Standard Deviation(%),6.950769741546608
+C,0-2,Interday Standard Deviation(%),5.715400248451538
+C,0-2,Repeatability(%),7.90735577732068
+C,0-2,Reproducibility(%),9.414482240924533
+C,02,Intraday Standard Deviation(%),7.157583391061541
+C,02,Accuracy(%),112.96
+C,02,Betweenday Standard Deviation(%),5.55233284304894
+C,02,Interday Standard Deviation(%),4.536760959098453
+C,02,Repeatability(%),6.336387562908588
+C,02,Reproducibility(%),7.502006843083736
+C,15,Intraday Standard Deviation(%),7.1854250628152325
+C,15,Accuracy(%),114.74000000000001
+C,15,Betweenday Standard Deviation(%),2.2007271525566194
+C,15,Interday Standard Deviation(%),0.0
+C,15,Repeatability(%),6.26235407252504
+C,15,Reproducibility(%),6.26235407252504
