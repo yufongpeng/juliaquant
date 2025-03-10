@@ -1,16 +1,37 @@
 [signal]
 area
 
+[rel_sig]
+relative_signal
+
+[est_conc]
+estimated_concentration
+
+[true_conc]
+true_concentration
+
+[acc]
+accuracy
+
 [delim]
 \t
 
 [pointlevel]
 1
+1
+2
 2
 3
+3
+4
 4
 5
+5
+6
 6
 7
+7
 8
+8
+9
 9

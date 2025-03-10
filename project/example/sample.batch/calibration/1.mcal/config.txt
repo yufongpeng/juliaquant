@@ -5,13 +5,13 @@ A
 nothing
 
 [type]
-true
-
-[zero]
 false
 
+[zero]
+true
+
 [weight]
-0.0
+-1.0
 
 [delim]
 \t

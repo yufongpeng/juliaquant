@@ -1,4 +1,4 @@
-﻿[delim]
+[delim]
 \t
 
 [Analyte]

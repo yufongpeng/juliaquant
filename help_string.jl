@@ -296,7 +296,28 @@ const str_switch = Dict{String, Vector{Option}}(
         ),
         Option(
             Item(
-                ["--col"],
+                ["--keylevel"],
+                ["nothing*", "…"]
+            ),
+            "Set column name or row key of calibration levels"
+        ),
+        Option(
+            Item(
+                ["--keyratio"],
+                ["nothing*", "…"]
+            ),
+            "Set column name or row key of ratios of concentrations"
+        ),
+        Option(
+            Item(
+                ["--keydf"],
+                ["nothing*", "…"]
+            ),
+            "Set column name or row key of dilution factors"
+        ),
+        Option(
+            Item(
+                ["--colkey"],
                 ["Sample*", "…"]
             ),
             "Set column name of row keys which are samples for `SampleDataTable`, and analytes for `AnalyteDataTable`"
@@ -336,41 +357,6 @@ const str_switch = Dict{String, Vector{Option}}(
                 ["-h", "--help"]
             ),
             printhelp
-        ),
-        Option(
-            Item(
-                ["-a", "--dev-acc"],
-                ["0.15*", "…"]
-            ),
-            "Set allowed deviance of accuracy"
-        ),
-        Option(
-            Item(
-                ["-l", "--lloq-multiplier"],
-                ["0.2/0.15*", "…"]
-            ),
-            "Set the multiplier of allowed deviance of accuracy for LLOQ. \ni\tThe allowed deviance of accuracy for LLOQ equals to '-d' * '-m'."
-        ),
-        Option(
-            Item(
-                ["-s", "--signal"],
-                ["nothing*", "area", "height", "…"]
-            ),
-            "Set signal data property name. 'nothing' indicates using default name from batch method."
-        ),
-        Option(
-            Item(
-                ["-r", "--rel-sig"],
-                ["relative_signal*", "…"]
-            ),
-            "Set relative signal data property name"
-        ),
-        Option(
-            Item(
-                ["-e", "--est-conc"],
-                ["estimated_concentration*", "…"]
-            ),
-            "Set estimated concentration data property name"
         ),
         Option(
             Item(
